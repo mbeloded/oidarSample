@@ -63,16 +63,16 @@ public class DrawerLiveNewsFragment extends DrawerFragment {
         mAdapter = new SectionsPagerAdapter(getActivity().getSupportFragmentManager());
         mViewPager = (ViewPager) view.findViewById(R.id.pager);
         mViewPager.setPageTransformer(true, new ZoomOutPageTransformer());
-//        mViewPager.setAdapter(mAdapter);
+        mViewPager.setAdapter(mAdapter);
 
 //        SlidingTabLayout slidingTabLayout = (SlidingTabLayout) view.findViewById(R.id.sliding_tabs);
 //        slidingTabLayout.setViewPager(mViewPager);
 
-//        int pos = 0;
-//        if (getArguments() != null) {
-//            pos = getArguments().getInt(EXTRA_CURRENT_PAGE, 0);
-//        }
-//        mViewPager.setCurrentItem(pos);
+        int pos = 0;
+        if (getArguments() != null) {
+            pos = getArguments().getInt(EXTRA_CURRENT_PAGE, 0);
+        }
+        mViewPager.setCurrentItem(pos);
 
         return view;
     }
@@ -116,7 +116,7 @@ public class DrawerLiveNewsFragment extends DrawerFragment {
 
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
-            fragments = new LiveNewsFragment[10];
+            fragments = new LiveNewsFragment[]{LiveNewsFragment.newInstance(), LiveNewsFragment.newInstance(), LiveNewsFragment.newInstance()};
         }
 
         /**

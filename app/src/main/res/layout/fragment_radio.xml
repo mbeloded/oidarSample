@@ -1,13 +1,88 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.oidar.fragment.base.RadioFragment">
+    tools:context="com.oidar.fragment.base.RadioFragment"
+    android:background="@drawable/round_rect_shape"
+    >
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_margin="10dp">
 
-</FrameLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center_horizontal">
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/bookmarkBtn"
+                android:layout_gravity="left"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:id="@+id/imageView2"
+                android:layout_weight="0.8" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/likeBtn"
+                android:layout_gravity="right"
+                android:layout_marginRight="0dp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/fileName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="File na,e"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#ffffff"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="140dp"
+            android:layout_gravity="center_horizontal" />
+
+        <TextView
+            android:id="@+id/showName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Not Too Deep with Grace Helbig"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#ffffff"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal" />
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="01:05:37"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#ffff6f19"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:layout_gravity="center_horizontal" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imgThumb"
+            android:layout_marginTop="20dp"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>
