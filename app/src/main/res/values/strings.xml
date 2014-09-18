@@ -1,4 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="app_name">OIDAR</string>
     <string name="talk_radio">Talk Radio</string>
     <string name="live_news">Live News</string>
@@ -31,18 +33,15 @@
     <string name="pref_clear_dialog_summary">This will reset all the data in the
         application and restart it. It cannot be undone, so be sure to backup if you want
         to revert.</string>
-
     <string name="version">Version: %1$s</string>
     <string name="change_log">Changelog</string>
     <string name="contact">Contact the developer</string>
     <string name="licences">Licences</string>
     <string name="send_email_title">Send email</string>
-
     <string name="edit_order_title">Order</string>
     <string name="edit_other_title">Other</string>
     <string name="edit_percentages_title">Percentages</string>
     <string name="deload_reps">Deload repetitions</string>
-
     <string name="showcase_workout_title">Set number of reps</string>
     <string name="showcase_workout_detail">Press the last row to set the amount of reps performed</string>
     <string name="showcase_old_workout_title">Swipe away!</string>
@@ -50,7 +49,6 @@
     <string name="showcase_workout_finish_title">Finished workout</string>
     <string name="showcase_workout_finish_detail">Finishing a workout without any
         performed reps will automatically fail the workout</string>
-
     <string name="pref_cat_deload">Deload</string>
     <string name="pref_auto_deload_summary">Automatically deload when you fail a workout</string>
     <string name="pref_auto_deload_title">Automatic deload</string>
@@ -71,5 +69,6 @@
     <string name="last_successful_backup">Last backup: %1$s</string>
     <string name="custom_round_to_value">Custom value</string>
     <string name="custom_round_to_pref_summary">Round do closest: %1$s</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

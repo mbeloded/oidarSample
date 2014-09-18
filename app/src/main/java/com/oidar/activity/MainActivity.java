@@ -4,7 +4,10 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -18,15 +21,19 @@ import com.oidar.fragment.base.DrawerLiveNewsFragment;
 import com.oidar.fragment.base.DrawerTalkRadioFragment;
 import com.oidar.model.DrawerListItem;
 import com.oidar.model.ListItemType;
+import com.oidar.sql.SqlHandler;
 import com.oidar.util.MyLog;
 import com.oidar.view.CustomDrawerLayout;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
  * Created by mbeloded on 9/17/14.
  */
 public class MainActivity extends BaseActivity {
+
+    public static final String ACTION_UPDATE = "action_update";
 
     private static final String EXTRA_SAVED_SELECTION = "savedSelection";
     private static final String EXTRA_SAVED_EDIT_PAGE = "savedEditPage";
@@ -121,6 +128,54 @@ public class MainActivity extends BaseActivity {
     }
 
     /**
+     * Called when the Activity needs to save it's current instance.
+     */
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        // Save our currently selected page
+        outState.putInt(EXTRA_SAVED_SELECTION, mSavedSelection);
+
+//        // If we're currently editing something in the edit section save that selection
+//        DrawerEditFragment fragment = (DrawerEditFragment)
+//                getSupportFragmentManager().findFragmentByTag(DrawerEditFragment.TAG);
+//        int page = fragment != null ? fragment.getCurrentPage() : 0;
+//        outState.putInt(EXTRA_SAVED_EDIT_PAGE, page);
+
+        // Save the state of our drawer
+        outState.putBoolean(EXTRA_IS_DRAWER_OPEN, mIsDrawerOpen);
+    }
+
+    /**
+     * Called when we receive a result code from the started activity.
+     */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        MyLog.d("Received result with code " + resultCode);
+        Intent intent = new Intent();
+        intent.setAction(ACTION_UPDATE);
+        LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
+    }
+
+    /**
+     * Called when activity start-up is complete.
+     */
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        // Sync the toggle state after onRestoreInstanceState has occurred.
+        mDrawerToggle.syncState();
+        if (mDrawerIsLocked) {
+            mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_OPEN);
+            mDrawerLayout.openDrawer(Gravity.START);
+        } else {
+            mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+        }
+    }
+
+    /**
      * Listener for pressing back in our drawer.
      */
     private final CustomDrawerLayout.OnHideListener mOnHideListener = new CustomDrawerLayout.OnHideListener() {
@@ -183,9 +238,9 @@ public class MainActivity extends BaseActivity {
     /**
      * Swaps fragments in the main content view if needed.
      */
-    private void selectItem(int position, int editPos) {
+    private void selectItem(int position, int selectedRadio) {
         if (!mAdapter.isPositionSelected(position)) {
-            DrawerFragment fragment = getFragmentToDisplay(position, editPos);
+            DrawerFragment fragment = getFragmentToDisplay(position, selectedRadio);
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.content_frame, fragment, fragment.getFragmentTag())
@@ -198,14 +253,58 @@ public class MainActivity extends BaseActivity {
     /**
      * Switch over the position and get the fragment to display.
      */
-    private DrawerFragment getFragmentToDisplay(int position, int editPos) {
+    private DrawerFragment getFragmentToDisplay(int position, int selectedRadio) {
+        SqlHandler handler = new SqlHandler(this);
+
+        DrawerFragment fragment = null;
+
         switch (position) {
             case 0:
-                return DrawerTalkRadioFragment.newInstance();
+
+                try {
+                    handler.open();
+
+                    fragment = DrawerTalkRadioFragment.newInstance(selectedRadio, handler);
+
+                } catch (SQLException e) {
+                    MyLog.e("Error purging extra exercises", e);
+                } finally {
+
+                    handler.close();
+                }
+
+                return fragment;
+
             case 1:
-                return DrawerLiveNewsFragment.newInstance();
+
+                try {
+                    handler.open();
+
+                    fragment = DrawerLiveNewsFragment.newInstance(selectedRadio, handler);
+
+                } catch (SQLException e) {
+                    MyLog.e("Error purging extra exercises", e);
+                } finally {
+
+                    handler.close();
+                }
+
+                return fragment;
+
             default:
-                return DrawerTalkRadioFragment.newInstance();
+                try {
+                    handler.open();
+
+                    fragment = DrawerTalkRadioFragment.newInstance(selectedRadio, handler);
+
+                } catch (SQLException e) {
+                    MyLog.e("Error purging extra exercises", e);
+                } finally {
+
+                    handler.close();
+                }
+
+                return fragment;
 //            case 2:
 //                return DrawerBookmarksFragment.newInstance(editPos);
 //            default:
