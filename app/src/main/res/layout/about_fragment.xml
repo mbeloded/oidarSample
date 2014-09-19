@@ -37,7 +37,9 @@
             android:id="@+id/howBtn"
             android:layout_gravity="center_horizontal"
             android:layout_margin="5dp"
-            android:layout_marginBottom="0dp" />
+            android:layout_marginBottom="0dp"
+            android:background="@color/btn_color"
+            android:textColor="#ffffffff" />
 
         <Button
             android:layout_width="fill_parent"
@@ -46,7 +48,9 @@
             android:id="@+id/faqBtn"
             android:layout_gravity="center_horizontal"
             android:layout_margin="5dp"
-            android:layout_marginBottom="0dp" />
+            android:layout_marginBottom="0dp"
+            android:textColor="#ffffffff"
+            android:background="@color/btn_color" />
 
         <Button
             android:layout_width="fill_parent"
@@ -55,7 +59,9 @@
             android:id="@+id/rateBtn"
             android:layout_gravity="center_horizontal"
             android:layout_margin="5dp"
-            android:layout_marginBottom="0dp" />
+            android:layout_marginBottom="0dp"
+            android:background="@color/btn_color"
+            android:textColor="#ffffffff" />
     </LinearLayout>
 
 </LinearLayout>
