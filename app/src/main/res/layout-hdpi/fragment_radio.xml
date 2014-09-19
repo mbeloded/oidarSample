@@ -4,6 +4,10 @@
     android:layout_height="match_parent"
     tools:context="com.oidar.fragment.base.RadioFragment"
     android:background="@drawable/round_rect_shape"
+    android:layout_marginTop="20dp"
+    android:layout_marginBottom="90dp"
+    android:layout_marginRight="20dp"
+    android:layout_marginLeft="20dp"
     >
 
     <LinearLayout
@@ -43,12 +47,12 @@
             android:id="@+id/fileName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="File name all"
+            android:text="File name hdpi"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="#ffffff"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="25dp"
             android:layout_gravity="center_horizontal" />
 
         <TextView
@@ -60,7 +64,7 @@
             android:textColor="#ffffff"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="25dp"
             android:layout_gravity="center_horizontal"
             android:gravity="center_horizontal" />
 
@@ -73,14 +77,14 @@
             android:textColor="#ffff6f19"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="10dp"
             android:layout_gravity="center_horizontal" />
 
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/imgThumb"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="15dp"
             />
 
     </LinearLayout>

@@ -5,6 +5,8 @@
         <item>@string/talk_radio</item>
         <item>@string/live_news</item>
         <item>@string/bookmarks</item>
+        <item>@string/whats_hot</item>
+        <item>@string/feedback</item>
     </string-array>
 
 </resources>

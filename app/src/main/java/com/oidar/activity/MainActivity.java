@@ -12,17 +12,21 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.oidar.R;
 import com.oidar.activity.base.BaseActivity;
 import com.oidar.adapter.DrawerAdapter;
+import com.oidar.fragment.AboutFragment;
+import com.oidar.fragment.DrawerLiveNewsFragment;
+import com.oidar.fragment.DrawerTalkRadioFragment;
+import com.oidar.fragment.FeedbackFragment;
 import com.oidar.fragment.base.DrawerFragment;
-import com.oidar.fragment.base.DrawerLiveNewsFragment;
-import com.oidar.fragment.base.DrawerTalkRadioFragment;
 import com.oidar.model.DrawerListItem;
 import com.oidar.model.ListItemType;
 import com.oidar.sql.SqlHandler;
 import com.oidar.util.MyLog;
+import com.oidar.util.OIDARConstants;
 import com.oidar.view.CustomDrawerLayout;
 
 import java.sql.SQLException;
@@ -31,7 +35,7 @@ import java.util.ArrayList;
 /**
  * Created by mbeloded on 9/17/14.
  */
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements OIDARConstants {
 
     public static final String ACTION_UPDATE = "action_update";
 
@@ -75,13 +79,13 @@ public class MainActivity extends BaseActivity {
             getActionBar().setHomeButtonEnabled(true);
         }
 
-        int savedPosition = 0;
+        int savedPosition = Screen.TALK_RADIO.ordinal();
         if (savedInstanceState != null) {
             mSavedSelection = savedInstanceState.getInt(EXTRA_SAVED_SELECTION, 0);
             savedPosition = savedInstanceState.getInt(EXTRA_SAVED_EDIT_PAGE, 0);
             mIsDrawerOpen = savedInstanceState.getBoolean(EXTRA_IS_DRAWER_OPEN, false);
         }
-        selectItem(mSavedSelection, savedPosition);
+        selectItem(Screen.values()[mSavedSelection], savedPosition);
     }
 
     /**
@@ -204,10 +208,16 @@ public class MainActivity extends BaseActivity {
                 R.drawable.ic_action_settings));
 
         items.add(new DrawerListItem(
-                ListItemType.SMALL,
+                ListItemType.REGULAR,
                 getString(R.string.action_item_about),
                 null,
                 R.drawable.ic_action_about_drawer));
+
+        items.add(new DrawerListItem(
+                ListItemType.SMALL,
+                getString(R.string.action_item_friends),
+                null,
+                R.drawable.ic_action_settings));
 
         return items;
     }
@@ -238,28 +248,28 @@ public class MainActivity extends BaseActivity {
     /**
      * Swaps fragments in the main content view if needed.
      */
-    private void selectItem(int position, int selectedRadio) {
-        if (!mAdapter.isPositionSelected(position)) {
+    private void selectItem(Screen position, int selectedRadio) {
+        if (!mAdapter.isPositionSelected(position.ordinal())) {
             DrawerFragment fragment = getFragmentToDisplay(position, selectedRadio);
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.content_frame, fragment, fragment.getFragmentTag())
                     .commit();
 
-            setTitle(mListItems.get(position).getTitle());
+            setTitle(mListItems.get(position.ordinal()).getTitle());
         }
     }
 
     /**
      * Switch over the position and get the fragment to display.
      */
-    private DrawerFragment getFragmentToDisplay(int position, int selectedRadio) {
+    private DrawerFragment getFragmentToDisplay(Screen position, int selectedRadio) {
         SqlHandler handler = new SqlHandler(this);
 
         DrawerFragment fragment = null;
 
         switch (position) {
-            case 0:
+            case TALK_RADIO:
 
                 try {
                     handler.open();
@@ -275,7 +285,7 @@ public class MainActivity extends BaseActivity {
 
                 return fragment;
 
-            case 1:
+            case LIVE_NEWS:
 
                 try {
                     handler.open();
@@ -291,11 +301,17 @@ public class MainActivity extends BaseActivity {
 
                 return fragment;
 
+            case FEEDBACK:
+
+                return FeedbackFragment.newInstance();
+
+//            case SETTINGS:
+//                return SettingsFragment.newInstance();
             default:
                 try {
                     handler.open();
 
-                    fragment = DrawerTalkRadioFragment.newInstance(selectedRadio, handler);
+                    fragment = AboutFragment.newInstance();
 
                 } catch (SQLException e) {
                     MyLog.e("Error purging extra exercises", e);
@@ -322,14 +338,13 @@ public class MainActivity extends BaseActivity {
             if (!mDrawerIsLocked) {
                 mDrawerLayout.closeDrawer(mDrawerList);
             }
-
             // Don't update the selected item until the FragmentTransaction is completed
             switch (mListItems.get(position).getType()) {
                 case REGULAR:
                     mDrawerLayout.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            selectItem(position, 0);
+                            selectItem(Screen.values()[position], 0);
                         }
                     }, 200);
 
@@ -341,9 +356,10 @@ public class MainActivity extends BaseActivity {
                             .equals(getString(R.string.action_item_settings))) {
                         launchActivity(SettingsActivity.class);
                     } else if (mListItems.get(position).getTitle()
-                            .equals(getString(R.string.action_item_about))) {
-                        launchActivity(AboutActivity.class);
+                            .equals(getString(R.string.action_item_friends))) {
+                        showSharingDialog();
                     }
+
                     break;
             }
         }
@@ -358,6 +374,10 @@ public class MainActivity extends BaseActivity {
                     startActivity(new Intent(MainActivity.this, target));
                 }
             }, 200);
+        }
+
+        private void showSharingDialog(){
+            Toast.makeText(getApplicationContext(), "show sharing", Toast.LENGTH_LONG).show();
         }
     }
 }

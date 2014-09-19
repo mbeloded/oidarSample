@@ -1,4 +1,4 @@
-package com.oidar.fragment.base;
+package com.oidar.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.oidar.R;
+import com.oidar.fragment.base.RadioFragment;
 import com.oidar.sql.SqlHandler;
 
 public class TalkRadioFragment extends RadioFragment {

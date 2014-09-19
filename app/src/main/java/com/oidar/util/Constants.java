@@ -7,8 +7,6 @@ public class Constants {
 
     public static final boolean DEBUG = false;
 
-    public static final String[] EXERCISES = new String[]{"Press", "Deadlift", "Bench", "Squat"};
-
     /**
      * Default value for application version.
      */

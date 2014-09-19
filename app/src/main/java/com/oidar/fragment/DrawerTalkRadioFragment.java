@@ -1,4 +1,4 @@
-package com.oidar.fragment.base;
+package com.oidar.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 
 import com.oidar.R;
 import com.oidar.animation.ZoomOutPageTransformer;
+import com.oidar.fragment.base.DrawerFragment;
+import com.oidar.fragment.base.RadioFragment;
 import com.oidar.model.Radio;
 import com.oidar.sql.SqlHandler;
 import com.oidar.util.MyLog;
@@ -19,10 +21,17 @@ import com.oidar.util.Util;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+
 /**
  * Created by mbeloded on 9/17/14.
  */
-public class DrawerLiveNewsFragment extends DrawerFragment {
+public class DrawerTalkRadioFragment extends DrawerFragment {
+
+    public DrawerTalkRadioFragment (){}
+
+    public static DrawerTalkRadioFragment newInstance(){
+        return new DrawerTalkRadioFragment();
+    }
 
     private static final String EXTRA_RADIO_LIST = "radioList";
     private static final String EXTRA_CURRENT_PAGE = "currentPage";
@@ -41,11 +50,8 @@ public class DrawerLiveNewsFragment extends DrawerFragment {
         return TAG;
     }
 
-    public DrawerLiveNewsFragment(){}
-
-
-    public static DrawerLiveNewsFragment newInstance(int type, SqlHandler sqlHandler){
-        DrawerLiveNewsFragment fragment = new DrawerLiveNewsFragment();
+    public static DrawerTalkRadioFragment newInstance(int type, SqlHandler sqlHandler){
+        DrawerTalkRadioFragment fragment = new DrawerTalkRadioFragment();
         Bundle bundle = new Bundle();
         bundle.putParcelableArrayList(EXTRA_RADIO_LIST, sqlHandler.getRadiosForList(type));
         fragment.setArguments(bundle);
@@ -112,17 +118,17 @@ public class DrawerLiveNewsFragment extends DrawerFragment {
      */
     private class SectionsPagerAdapter extends FragmentStatePagerAdapter {
 
-        private final RadioFragment[] fragments;
+        private final TalkRadioFragment[] fragments;
 
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
-            fragments = new LiveNewsFragment[]{LiveNewsFragment.newInstance(), LiveNewsFragment.newInstance(), LiveNewsFragment.newInstance()};
+            fragments = new TalkRadioFragment[]{TalkRadioFragment.newInstance(), TalkRadioFragment.newInstance(), TalkRadioFragment.newInstance()};
         }
 
         /**
          * Return the child fragments.
          */
-        public RadioFragment[] getFragments() {
+        public TalkRadioFragment[] getFragments() {
             return fragments;
         }
 

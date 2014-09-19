@@ -1,16 +1,18 @@
-package com.oidar.fragment.base;
+package com.oidar.fragment;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 
+import com.oidar.R;
+import com.oidar.fragment.base.DrawerFragment;
+
 /**
  * About fragment which displays helpful information.
  */
-public class AboutFragment extends Fragment implements AdapterView.OnItemClickListener {
+public class AboutFragment extends DrawerFragment implements AdapterView.OnItemClickListener {
 
     public static final String TAG = AboutFragment.class.getName();
 
@@ -31,7 +33,7 @@ public class AboutFragment extends Fragment implements AdapterView.OnItemClickLi
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-//        View view = inflater.inflate(R.layout.listview_empty, container, false);
+        View view = inflater.inflate(R.layout.about_fragment, container, false);
 
 
 //        AboutAdapter adapter = new AboutAdapter(
@@ -41,7 +43,7 @@ public class AboutFragment extends Fragment implements AdapterView.OnItemClickLi
 //        ListView list = (ListView) view.findViewById(R.id.listView);
 //        list.setAdapter(adapter);
 //        list.setOnItemClickListener(this);
-        return null;
+        return view;
     }
 
     /**
@@ -75,6 +77,11 @@ public class AboutFragment extends Fragment implements AdapterView.OnItemClickLi
 //                        .show(getActivity().getSupportFragmentManager(), null);
 //                break;
 //        }
+    }
+
+    @Override
+    public String getFragmentTag() {
+        return TAG;
     }
 
 //    /**

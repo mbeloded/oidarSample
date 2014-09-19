@@ -1,8 +1,7 @@
-package com.oidar.fragment.base;
+package com.oidar.fragment;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.ListPreference;
 import android.preference.Preference;
 import android.support.v4.preference.PreferenceFragment;
 import android.view.LayoutInflater;
@@ -10,8 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.oidar.R;
-import com.oidar.util.MathHelper;
-import com.oidar.util.PreferenceUtil;
 
 /**
  * Fragment to manage settings.
@@ -22,8 +19,8 @@ public class SettingsFragment extends PreferenceFragment implements
 
     public static final String TAG = SettingsFragment.class.getName();
 
-    private static final int DELOAD_REF = 1;
-    private static final int ROUND_REF = 2;
+    private static final int FAST_PLAYBACK_REF = 1;
+    private static final int OFFLINE_PLAYBACK_REF = 2;
 
     public SettingsFragment() {
     }
@@ -43,10 +40,7 @@ public class SettingsFragment extends PreferenceFragment implements
             LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         addPreferencesFromResource(R.xml.settings_xml);
-        updateDefaultValues();
-        updateNumberPref();
-        updateRoundToPref();
-        findPreference(PreferenceUtil.KEY_CLEAR_DATA).setOnPreferenceClickListener(this);
+        updatePlaybackValues();
         return super.onCreateView(inflater, container, savedInstanceState);
 
     }
@@ -80,14 +74,14 @@ public class SettingsFragment extends PreferenceFragment implements
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         Preference preference = findPreference(key);
 
-        if (key.equals(PreferenceUtil.KEY_ROUND_TO)) {
-            preference.setSummary(((ListPreference) preference).getEntry());
-            MathHelper.getInstance().resetRoundToValue();
-            updateRoundToPref();
-        } else if (key.equals(PreferenceUtil.KEY_DELOAD_TYPE)) {
-            preference.setSummary(((ListPreference) preference).getEntry());
-            updateNumberPref();
-        }
+//        if (key.equals(PreferenceUtil.KEY_ROUND_TO)) {
+//            preference.setSummary(((ListPreference) preference).getEntry());
+//            MathHelper.getInstance().resetRoundToValue();
+//            updateRoundToPref();
+//        } else if (key.equals(PreferenceUtil.KEY_DELOAD_TYPE)) {
+//            preference.setSummary(((ListPreference) preference).getEntry());
+//            updateNumberPref();
+//        }
     }
 
     /**
@@ -189,9 +183,9 @@ public class SettingsFragment extends PreferenceFragment implements
 //    }
 
     /**
-     * Update the number preference.
+     * Update the playback preferences.
      */
-    private void updateNumberPref() {
+    private void updatePlaybackValues() {
 //        Preference numberPref = findPreference(PreferenceUtil.KEY_CUSTOM_DELOAD_TYPE);
 //        ListPreference deloadType = (ListPreference) findPreference(PreferenceUtil.KEY_DELOAD_TYPE);
 //

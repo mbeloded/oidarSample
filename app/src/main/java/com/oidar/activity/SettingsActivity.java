@@ -3,7 +3,7 @@ package com.oidar.activity;
 import android.os.Bundle;
 
 import com.oidar.activity.base.BaseActivity;
-import com.oidar.fragment.base.SettingsFragment;
+import com.oidar.fragment.SettingsFragment;
 
 /**
  * The activity for displaying our settings.
