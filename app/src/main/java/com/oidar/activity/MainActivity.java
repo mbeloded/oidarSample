@@ -1,6 +1,8 @@
 package com.oidar.activity;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -31,6 +33,7 @@ import com.oidar.view.CustomDrawerLayout;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by mbeloded on 9/17/14.
@@ -377,7 +380,27 @@ public class MainActivity extends BaseActivity implements OIDARConstants {
         }
 
         private void showSharingDialog(){
-            Toast.makeText(getApplicationContext(), "show sharing", Toast.LENGTH_LONG).show();
+
+            try {
+                Intent shareIntent = new Intent(android.content.Intent.ACTION_SEND);
+
+                shareIntent.setType("text/plain");
+                shareIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Please check out OIDAR");
+                shareIntent.putExtra(android.content.Intent.EXTRA_TEXT, "Please check out OIDAR, the best news and talk radio app so simple it actually works http://bit.ly/1oMBgWN");
+
+                final PackageManager pm = getPackageManager();
+                final List<ResolveInfo> matches = pm.queryIntentActivities(shareIntent, 0);
+                ResolveInfo best = null;
+                for (final ResolveInfo info : matches)
+                    if (info.activityInfo.packageName.endsWith(".gm") ||
+                            info.activityInfo.name.toLowerCase().contains("gmail")) best = info;
+                if (best != null)
+                    shareIntent.setClassName(best.activityInfo.packageName, best.activityInfo.name);
+
+                startActivity(Intent.createChooser(shareIntent, "Share via"));
+            } catch (Exception e) {
+                Toast.makeText(getApplicationContext(), "Application not found", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }

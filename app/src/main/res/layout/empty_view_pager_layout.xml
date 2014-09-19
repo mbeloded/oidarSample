@@ -23,22 +23,28 @@
             android:paddingBottom="7dp">
 
             <ImageButton
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:id="@+id/volume"
-                android:scaleType="fitXY" />
+                android:scaleType="fitXY"
+                android:layout_gravity="center"
+                android:background="@drawable/soundon"
+                android:layout_marginRight="10dp" />
 
             <ImageButton
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:id="@+id/share"
-                android:scaleType="fitXY" />
+                android:scaleType="fitXY"
+                android:background="@drawable/compass"
+                android:layout_gravity="center"
+                android:layout_marginRight="10dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Large Text"
+                android:text="Music"
                 android:id="@+id/title"
                 android:textColor="#ffffff"
                 android:layout_weight="0.8"
@@ -46,16 +52,21 @@
                 android:gravity="center_horizontal" />
 
             <ImageButton
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:id="@+id/fb"
-                android:scaleType="fitXY" />
+                android:scaleType="fitXY"
+                android:layout_gravity="center"
+                android:background="@drawable/facebook"
+                android:layout_marginRight="10dp" />
 
             <ImageButton
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:id="@+id/tw"
-                android:scaleType="fitXY" />
+                android:scaleType="fitXY"
+                android:layout_gravity="center"
+                android:background="@drawable/twitter" />
 
         </LinearLayout>
 
@@ -85,9 +96,10 @@
 
             <ImageButton
                 android:layout_width="70dp"
-                android:layout_height="60dp"
+                android:layout_height="70dp"
                 android:id="@+id/play_pause"
-                android:scaleType="fitXY" />
+                android:scaleType="fitXY"
+                android:background="@drawable/player" />
 
             <ImageButton
                 android:layout_width="wrap_content"
