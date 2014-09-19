@@ -92,7 +92,8 @@
             <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/prev" />
+                android:id="@+id/prev"
+                android:background="@drawable/rewind" />
 
             <ImageButton
                 android:layout_width="70dp"
@@ -104,7 +105,8 @@
             <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/forv" />
+                android:id="@+id/forv"
+                android:background="@drawable/fast_forward" />
         </LinearLayout>
 
         <SeekBar

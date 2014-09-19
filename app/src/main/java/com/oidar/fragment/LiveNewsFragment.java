@@ -2,6 +2,8 @@ package com.oidar.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -35,6 +37,12 @@ public class LiveNewsFragment  extends RadioFragment {
         initValues();
 
         return view;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_live_news, menu);
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
     private void initValues() {

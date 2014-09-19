@@ -2,6 +2,8 @@ package com.oidar.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -40,6 +42,12 @@ public class TalkRadioFragment extends RadioFragment {
     private void initViews(View view)
     {
 
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_talk_radio, menu);
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
     /**

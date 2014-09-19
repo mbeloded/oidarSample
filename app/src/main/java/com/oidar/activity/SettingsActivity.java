@@ -1,6 +1,7 @@
 package com.oidar.activity;
 
 import android.os.Bundle;
+import android.view.Menu;
 
 import com.oidar.activity.base.BaseActivity;
 import com.oidar.fragment.SettingsFragment;
@@ -21,5 +22,13 @@ public class SettingsActivity extends BaseActivity {
                 .beginTransaction()
                 .replace(android.R.id.content, SettingsFragment.newInstance(), SettingsFragment.TAG)
                 .commit();
+    }
+
+    /**
+     * Called to create our options menu.
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return true;
     }
 }

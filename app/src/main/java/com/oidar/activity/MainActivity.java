@@ -10,6 +10,7 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Gravity;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -89,6 +90,27 @@ public class MainActivity extends BaseActivity implements OIDARConstants {
             mIsDrawerOpen = savedInstanceState.getBoolean(EXTRA_IS_DRAWER_OPEN, false);
         }
         selectItem(Screen.values()[mSavedSelection], savedPosition);
+    }
+
+    /**
+     * Called before our option menu is created.
+     */
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+//        menu.findItem(R.id.action_calendar).setVisible(
+//                mWorkout != null && mWorkout.isComplete());
+        return super.onPrepareOptionsMenu(menu);
+    }
+
+    /**
+     * Called to create our options menu.
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.menu_talk_radio, menu);
+
+        return true;
     }
 
     /**
